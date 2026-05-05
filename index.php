@@ -516,7 +516,7 @@ $sertifikatGrouped = groupItems($sertifikat);
     }
 
     .page-wrapper {
-      padding-top: 70px;
+      padding-top: 50px;
     }
 
     /* ── RESPONSIVE ── */

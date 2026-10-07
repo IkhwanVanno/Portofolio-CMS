@@ -1,5 +1,5 @@
 #environtment & Credentials
-.config.php
+includes/config.php
 
 #folder Uploads & User Data
 uploads/

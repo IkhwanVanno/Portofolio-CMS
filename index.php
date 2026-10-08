@@ -26,670 +26,13 @@ $sertifikatGrouped = groupItems($sertifikat);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><?= htmlspecialchars($site['title'] ?? 'Portfolio') ?></title>\
+  <title><?= htmlspecialchars($site['title'] ?? 'Portfolio') ?></title>
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
     rel="stylesheet">
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --cream: #F5F0E8;
-      --cream-dark: #EDE5D0;
-      --blue: #1B2B4B;
-      --blue-mid: #2A3F6B;
-      --blue-light: #3D5A8A;
-      --gold: #C9A96E;
-      --gold-light: #E8C99A;
-      --text-dark: #1a1a2e;
-      --text-light: #f8f5f0;
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'DM Sans', sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--text-dark);
-      overflow-x: hidden;
-    }
-    img {
-    max-width: 100%;
-    display: block;
-    }
-
-    section,
-    div,
-    main,
-    header,
-    footer {
-      max-width: 100%;
-    }
-
-    /* ── HEADER ── */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(27, 43, 75, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201, 169, 110, 0.2);
-    }
-
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .site-title {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: var(--gold-light);
-      letter-spacing: 0.05em;
-    }
-
-    .site-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-
-    .site-nav a {
-      color: rgba(248, 245, 240, 0.8);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 400;
-      transition: color 0.3s;
-    }
-
-    .site-nav a:hover {
-      color: var(--gold-light);
-    }
-
-    .btn-menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--gold-light);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .mobile-menu {
-      background: var(--blue);
-      padding: 1rem 2rem;
-      border-top: 1px solid rgba(201, 169, 110, 0.2);
-    }
-
-    .mobile-menu ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .mobile-menu a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* ── SECTIONS ── */
-    .section {
-      min-height: 100vh;
-      padding: 100px 2rem 80px;
-    }
-
-    .section--biru {
-      background: var(--blue);
-      color: var(--text-light);
-    }
-
-    .section--creamee {
-      background: var(--cream);
-      color: var(--text-dark);
-    }
-
-    /* ── INTRO ── */
-    #intro {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #intro::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(27, 43, 75, 0.7) 0%, rgba(27, 43, 75, 0.3) 100%);
-    }
-
-    #intro > div {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      width: 100%;
-      max-width: 900px;
-      padding: 0 1rem;
-    }
-
-    #intro h1 {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 300;
-      color: var(--text-light);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      text-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    #intro h1 em {
-      color: var(--gold-light);
-      font-style: italic;
-    }
-
-    /* ── ABOUT ── */
-    .about-inner {
-      max-width: 1000px;
-      margin: 0 auto 4rem;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-inner img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 2px;
-      box-shadow: 12px 12px 0 var(--blue-mid);
-      border: 1px solid rgba(201, 169, 110, 0.3);
-    }
-
-    .about-inner h2 {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--gold-light);
-      margin-bottom: 1.5rem;
-      line-height: 1;
-    }
-
-    .about-inner p {
-      font-size: 1rem;
-      line-height: 1.8;
-      opacity: 0.85;
-    }
-
-    .about-subs {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .about-sub {
-      padding: 2rem;
-      border: 1px solid rgba(201, 169, 110, 0.25);
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .about-sub h2 {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      color: var(--gold-light);
-      margin-bottom: 0.75rem;
-      font-weight: 400;
-    }
-
-    .about-sub p {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      opacity: 0.75;
-    }
-
-    /* ── SECTION HEADER ── */
-    .section-header {
-      max-width: 1000px;
-      margin: 0 auto 4rem;
-    }
-
-    .text-section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
-      font-weight: 500;
-    }
-
-    .section--biru .text-section-label {
-      color: var(--gold-light);
-    }
-
-    .section-header h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.2;
-    }
-
-    /* ── SLIDER ── */
-    .slider-wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slider-track {
-      display: flex;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .slider-slide {
-      min-width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .slide-item {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 2.5rem;
-      align-items: start;
-      padding: 2rem;
-      border: 1px solid rgba(201, 169, 110, 0.15);
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .section--creamee .slide-item {
-      background: rgba(27, 43, 75, 0.04);
-      border-color: rgba(27, 43, 75, 0.1);
-    }
-
-    .slide-item img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      border-radius: 1px;
-    }
-
-    .slide-item h2 {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: var(--gold-light);
-      margin-bottom: 0.75rem;
-    }
-
-    .section--creamee .slide-item h2 {
-      color: var(--blue);
-    }
-
-    .slide-item p {
-      font-size: 0.9rem;
-      line-height: 1.75;
-      opacity: 0.8;
-    }
-
-    .slider-controls {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .btn-slider {
-      background: none;
-      border: 1px solid rgba(201, 169, 110, 0.4);
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      border-radius: 1px;
-      transition: all 0.3s;
-    }
-
-    .btn-slider:hover {
-      background: rgba(201, 169, 110, 0.15);
-      border-color: var(--gold);
-    }
-
-    .btn-slider img {
-      width: 24px;
-      height: 24px;
-      display: block;
-      filter: invert(1);
-    }
-
-    .section--creamee .btn-slider img {
-      filter: none;
-    }
-
-    /* ── GALLERY ── */
-    .gallery-overflow {
-      overflow: hidden;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .gallery-track {
-      display: flex;
-      gap: 1.5rem;
-      width: max-content;
-      animation: galleryScroll 30s linear infinite;
-    }
-
-    .gallery-track:hover {
-      animation-play-state: paused;
-    }
-
-    .gallery-image {
-      width: 280px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 2px;
-      flex-shrink: 0;
-      border: 1px solid rgba(201, 169, 110, 0.2);
-    }
-
-    @keyframes galleryScroll {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* ── CONTACT ── */
-    .contact-list {
-      max-width: 700px;
-      margin: 0 auto;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .contact-list li {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(27, 43, 75, 0.12);
-      border-radius: 2px;
-      background: rgba(27, 43, 75, 0.03);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .contact-list li:hover {
-      transform: translateX(6px);
-      box-shadow: -3px 0 0 var(--blue);
-    }
-
-    .contact-icon img {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-    }
-
-    .contact-label {
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      color: var(--blue);
-      min-width: 80px;
-    }
-
-    .contact-list a {
-      color: var(--blue);
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-
-    /* ── FOOTER ── */
-    .site-footer {
-      background: var(--blue);
-      color: rgba(248, 245, 240, 0.6);
-      padding: 3rem 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(201, 169, 110, 0.2);
-    }
-
-    .footer-tagline {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .footer-socials {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .btn-social {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border: 1px solid rgba(201, 169, 110, 0.3);
-      border-radius: 50%;
-      transition: all 0.3s;
-    }
-
-    .btn-social:hover {
-      background: rgba(201, 169, 110, 0.15);
-      border-color: var(--gold);
-    }
-
-    .btn-social img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      filter: invert(1) brightness(0.85);
-    }
-
-    .text-justify {
-      text-align: justify;
-    }
-
-/* ── RESPONSIVE TABLET & MOBILE ── */
-@media (max-width: 768px) {
-
-  html,
-  body {
-    overflow-x: hidden;
-    width: 100%;
-  }
-
-  .page-wrapper {
-    overflow-x: hidden;
-  }
-
-  .site-nav {
-    display: none;
-  }
-
-  .btn-menu-toggle {
-    display: block;
-  }
-
-  .header-inner {
-    padding: 0 1rem;
-    height: 64px;
-  }
-
-  .site-title {
-    font-size: 1.1rem;
-    max-width: 80%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .mobile-menu {
-    padding: 1rem;
-  }
-
-  .section {
-    min-height: auto;
-    padding: 90px 1rem 60px;
-  }
-
-  /* INTRO */
-  #intro {
-    min-height: 100vh;
-    text-align: center;
-    padding: 120px 1rem 80px;
-  }
-
-  #intro > div {
-    width: 100%;
-  }
-
-  #intro h1 {
-    font-size: clamp(2rem, 9vw, 3.5rem);
-    line-height: 1.2;
-    word-break: break-word;
-  }
-
-  /* ABOUT */
-  .about-inner {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .about-inner img {
-    max-width: 260px;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .about-inner h2 {
-    font-size: 2.2rem;
-    text-align: center;
-  }
-
-  .about-inner p {
-    font-size: 0.95rem;
-  }
-
-  .about-subs {
-    grid-template-columns: 1fr;
-  }
-
-  .about-sub {
-    padding: 1.5rem;
-  }
-
-  /* SECTION TITLE */
-  .section-header {
-    margin-bottom: 2rem;
-  }
-
-  .section-header h1 {
-    font-size: 2rem;
-    line-height: 1.3;
-  }
-
-  /* SLIDER */
-  .slider-wrapper {
-    overflow: hidden;
-  }
-
-  .slider-slide {
-    gap: 1.5rem;
-  }
-
-  .slide-item {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 1.25rem;
-  }
-
-  .slide-item img {
-    width: 100%;
-    height: auto;
-  }
-
-  .slide-item h2 {
-    font-size: 1.5rem;
-  }
-
-  .slide-item p {
-    font-size: 0.9rem;
-  }
-
-  .slider-controls {
-    justify-content: center;
-  }
-
-  /* GALLERY */
-  .gallery-image {
-    width: 220px;
-    height: 160px;
-  }
-
-  /* CONTACT */
-  .contact-list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
-
-  .contact-label {
-    min-width: auto;
-  }
-
-  .contact-list a {
-    word-break: break-word;
-  }
-
-  /* FOOTER */
-  .footer-socials {
-    flex-wrap: wrap;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -979,23 +322,68 @@ $sertifikatGrouped = groupItems($sertifikat);
   </main>
 
   <footer class="site-footer">
-    <p class="footer-tagline"><?= htmlspecialchars($site['footer'] ?? '') ?></p>
-    <div class="footer-socials">
-      <?php if (!empty($about['whatsapp_link'])): ?>
-        <a class="btn-social" href="<?= htmlspecialchars($about['whatsapp_link']) ?>" target="_blank">
-          <img src="admin/assets/wa.png" alt="WhatsApp" onerror="this.innerHTML='W'" />
-        </a>
-      <?php endif; ?>
-      <?php if (!empty($about['instagram_link'])): ?>
-        <a class="btn-social" href="<?= htmlspecialchars($about['instagram_link']) ?>" target="_blank">
-          <img src="admin/assets/ig.png" alt="Instagram" onerror="this.innerHTML='I'" />
-        </a>
-      <?php endif; ?>
-      <?php if (!empty($about['email'])): ?>
-        <a class="btn-social" href="mailto:<?= htmlspecialchars($about['email']) ?>" target="_blank">
-          <img src="admin/assets/mail.png" alt="Email" onerror="this.innerHTML='E'" />
-        </a>
-      <?php endif; ?>
+    <div class="footer-container">
+      <section class="footer-information">
+        <div class="footer-col">
+          <h3><?= htmlspecialchars($site['title'] ?? '') ?></h3>
+          <p><?= htmlspecialchars($site['footer'] ?? '') ?></p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="#intro">Intro</a></li>
+            <li><a href="#about-me">About Me</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#certificate">Certificate</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <ul class="social-links">
+            <?php if (!empty($about['whatsapp_link'])): ?>
+              <li>
+                <a href="<?= htmlspecialchars($about['whatsapp_link']) ?>" target="_blank" rel="noopener noreferrer">
+                  WhatsApp
+                </a>
+              </li>
+            <?php endif; ?>
+
+            <?php if (!empty($about['instagram_link'])): ?>
+              <li>
+                <a href="<?= htmlspecialchars($about['instagram_link']) ?>" target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a>
+              </li>
+            <?php endif; ?>
+
+            <?php if (!empty($about['github'])): ?>
+              <li>
+                <a href="<?= htmlspecialchars($about['github']) ?>" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              </li>
+            <?php endif; ?>
+
+            <?php if (!empty($about['linkedin'])): ?>
+              <li>
+                <a href="<?= htmlspecialchars($about['linkedin']) ?>" target="_blank" rel="noopener noreferrer">
+                  LinkedIn
+                </a>
+              </li>
+            <?php endif; ?>
+          </ul>
+        </div>
+      </section>
+
+      <section class="footer-bottom">
+        <p>&copy; <?= date('Y') ?> <?= htmlspecialchars($site['title'] ?? '') ?>. All rights reserved.</p>
+        <p>Dibuat dengan PHP Native</p>
+      </section>
     </div>
   </footer>
 
@@ -1034,9 +422,14 @@ $sertifikatGrouped = groupItems($sertifikat);
     // Smooth reveal on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
       });
-    }, { threshold: 0.1 });
+    }, {
+      threshold: 0.1
+    });
 
     document.querySelectorAll('.slide-item, .about-sub, .contact-list li').forEach(el => {
       el.style.opacity = '0';
